@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable ,HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'role'
     ];
 
     /**
@@ -38,11 +41,40 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+
+
+
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+
+
+
+
+
+
+
+
+    use HasFactory, Notifiable;
+
+
+
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'created_by');
+    }
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+    public function payments()
+    {
+        return $this->hasManyThrough(Payment::class, Booking::class);
     }
 }

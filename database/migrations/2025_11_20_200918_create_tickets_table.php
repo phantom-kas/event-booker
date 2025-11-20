@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            $table->enum('type', ['VIP', 'Standard', 'Economy'])->default('Standard');
+            $table->decimal('price', 10, 2);
+            $table->integer('quantity');
+            $table->foreignId('event_id')->constrained('events');
             $table->timestamps();
         });
     }
