@@ -1,0 +1,687 @@
+{
+	"info": {
+		"_postman_id": "17b1612c-7c05-4bad-8adb-67469d260195",
+		"name": "Event Booker",
+		"description": "**Introduction**\n\nThe Event Booking API allows users to create, manage, and book events, as well as handle ticketing and payments. The API supports role-based access for **administrators**, **organizers**, and **customers**, ensuring secure operations for event management and booking. All endpoints return JSON responses and follow RESTful conventions.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21049970"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"user@example.com\",\r\n  \"password\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}api/login",
+							"host": [
+								"{{host}}api"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.getpostman.com/me",
+									"protocol": "https",
+									"host": [
+										"api",
+										"getpostman",
+										"com"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": 12345678,\n        \"username\": \"taylor-lee\",\n        \"email\": \"taylor.lee@example.com\",\n        \"fullName\": \"Taylor Lee\",\n        \"avatar\": \"https://example.com/user/r5u9qpvmujfjf6lbqmga.jpg\",\n        \"isPublic\": true\n    },\n    \"operations\": [\n        {\n            \"name\": \"mock_usage\",\n            \"limit\": 1000000,\n            \"usage\": 110276,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"monitor_request_runs\",\n            \"limit\": 10000000,\n            \"usage\": 1141750,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"api_usage\",\n            \"limit\": 1000000,\n            \"usage\": 16240,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"custom_domains\",\n            \"limit\": 25,\n            \"usage\": 25,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"serverless_requests\",\n            \"limit\": 10000,\n            \"usage\": 0,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"integrations\",\n            \"limit\": 5000,\n            \"usage\": 1018,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"cloud_agent_requests\",\n            \"limit\": 1000000,\n            \"usage\": 1615,\n            \"overage\": 0\n        }\n    ]\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.getpostman.com/me",
+									"protocol": "https",
+									"host": [
+										"api",
+										"getpostman",
+										"com"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|Qp2nA626UqMORxJFw1eM2UXPqnTO9l87cwF1S1pX57805f73",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}api/me",
+							"host": [
+								"{{host}}api"
+							],
+							"path": [
+								"me"
+							],
+							"query": [
+								{
+									"key": "Auth",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"description": "**Get Current User Info**\n\n- **Description:** Retrieves information about the currently authenticated user.\n    \n- **Authentication:** Required"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 2|Fkuw11IGaAeI3dF1yVMP8FLmDqSnHVdlyZK7Yhv485896935",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}api/logout",
+							"host": [
+								"{{host}}api"
+							],
+							"path": [
+								"logout"
+							]
+						},
+						"description": "- **Description:** Logs out the currently authenticated user by deleting their current access token.\n    \n- **Authentication:** Required"
+					},
+					"response": []
+				},
+				{
+					"name": "register customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Kannyiri Safana\",\r\n    \"email\":\"kannyirisafana@outlook.com\",\r\n    \"role\":\"customer\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register organizer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Kannyiri Safana\",\r\n    \"email\":\"kannyirisafana@outlook.com\",\r\n    \"role\":\"customer\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}",
+							"host": [
+								"{{host}}"
+							]
+						},
+						"description": "Gets information about the authenticated user."
+					},
+					"response": []
+				}
+			],
+			"description": "The `/me` endpoints let you manage information about the authenticated user."
+		},
+		{
+			"name": "events",
+			"item": [
+				{
+					"name": "events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}api/events",
+							"host": [
+								"{{host}}api"
+							],
+							"path": [
+								"events"
+							]
+						},
+						"description": "**Retrieve All Events**\n\n- **Description:** Retrieves a paginated list of all events. Accessible by anyone.\n    \n- **Authentication:** Not required"
+					},
+					"response": []
+				},
+				{
+					"name": "event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|Qp2nA626UqMORxJFw1eM2UXPqnTO9l87cwF1S1pX57805f73",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Sample Event\",\r\n  \"description\": \"Test description\",\r\n  \"location\": \"Accra\",\r\n  \"start_date\": \"2025-11-21 10:00:00\",\r\n  \"end_date\": \"2025-11-22 18:00:00\",\r\n  \"capacity\": 100,\r\n  \"price\": 50\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}api/events",
+							"host": [
+								"{{host}}api"
+							],
+							"path": [
+								"events"
+							]
+						},
+						"description": "StartFragmentCreate EventEndFragment\n\n- **Description:** Creates a new event in the system. Only organizers can create events.EndFragment\n    \n- **Authentication:** Required (organizer role)EndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "get event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}api/events/1",
+							"host": [
+								"{{host}}api"
+							],
+							"path": [
+								"events",
+								"1"
+							]
+						},
+						"description": "_**Retrieve Single Event**_\n\n- **Description:** Retrieves a specific event by its ID.\n    \n- **Path Variable:** `eventId` (integer)\n    \n- **Authentication:** Not required"
+					},
+					"response": []
+				},
+				{
+					"name": "delete event",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|Qp2nA626UqMORxJFw1eM2UXPqnTO9l87cwF1S1pX57805f73",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}api/events/1",
+							"host": [
+								"{{host}}api"
+							],
+							"path": [
+								"events",
+								"1"
+							]
+						},
+						"description": "**Delete Event**\n\n- **Description:** Deletes an existing event. Only the creator organizer can delete their event.\n    \n- **Path Variable:** `eventId` (integer)\n    \n- **Authentication:** Required (organizer role)"
+					},
+					"response": []
+				},
+				{
+					"name": "update event",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|Qp2nA626UqMORxJFw1eM2UXPqnTO9l87cwF1S1pX57805f73",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Updated Event Title\",\r\n  \"description\": \"Updated description\",\r\n  \"location\": \"Updated location\",\r\n  \"start_date\": \"datetime\",\r\n  \"end_date\": \"datetime\",\r\n  \"capacity\": \"integer\",\r\n  \"price\": \"decimal\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}api/events/1",
+							"host": [
+								"{{host}}api"
+							],
+							"path": [
+								"events",
+								"1"
+							]
+						},
+						"description": "**Update Event**\n\n- **Description:** Updates an existing event. Only the creator organizer can update their event.\n    \n- **Path Variable:** `eventId` (integer)\n    \n- **Authentication:** Required (organizer role)"
+					},
+					"response": []
+				}
+			],
+			"description": "The `/collections` endpoints let you manage your [collections](https://learning.postman.com/docs/sending-requests/intro-to-collections/)."
+		},
+		{
+			"name": "tickets",
+			"item": [
+				{
+					"name": "create tickets",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|Qp2nA626UqMORxJFw1eM2UXPqnTO9l87cwF1S1pX57805f73",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}api/events/3/tickets",
+							"host": [
+								"{{host}}api"
+							],
+							"path": [
+								"events",
+								"3",
+								"tickets"
+							]
+						},
+						"description": "Description:Creates a new ticket for an event. Only the organizer who created the event can add tickets\n\nPath Variable:`eventId` – ID of the event to add tickets to\n\n**Authentication:** Required (organizer only)"
+					},
+					"response": []
+				},
+				{
+					"name": "update tickets",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}api/tickets/1",
+							"host": [
+								"{{host}}api"
+							],
+							"path": [
+								"tickets",
+								"1"
+							]
+						},
+						"description": "- **Description:** Updates a ticket. Only the organizer who created the event can update tickets.\n    \n\nPath Variable:`eventId` – ID of the tickets to update\n\n**Authentication:** Required (organizer only)"
+					},
+					"response": []
+				},
+				{
+					"name": "delete tickets",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "ticket/1",
+							"host": [
+								"ticket"
+							],
+							"path": [
+								"1"
+							]
+						},
+						"description": "- Description: Deletes a ticket. Only the organizer who created the event can delete tickets.\n\n- Path Variable: ticketId – ID of the ticket to delete\n-Authentication: Required (organizer only)\n"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "booking",
+			"item": [
+				{
+					"name": "add booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 2|X9gDO562hEIkWhdJZmHgVED5oWAmM8VGXoebB7Sja98528d6",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}api/tickets/1/bookings",
+							"host": [
+								"{{host}}api"
+							],
+							"path": [
+								"tickets",
+								"1",
+								"bookings"
+							]
+						},
+						"description": "# Create Booking\n- Description: Books tickets for a specific ticket. Quantity must not exceed available tickets.\n- Path Variable: ticketId – ID of the ticket to book\n- Authentication: Required (customer only)"
+					},
+					"response": []
+				},
+				{
+					"name": "List Bookings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1|Qp2nA626UqMORxJFw1eM2UXPqnTO9l87cwF1S1pX57805f73",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}api/bookings",
+							"host": [
+								"{{host}}api"
+							],
+							"path": [
+								"bookings"
+							]
+						},
+						"description": "# List Bookings\n\n- Description: Retrieves all bookings of the currently authenticated user, with ticket and event details.\n    \n- Query Parameters: per_page – Optional, number of bookings per page (default: 10)\n    \n- Authentication: Required (customers)"
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelbooking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4|ous2tXgR4tSdoH2CtJ6vsphVXdPyoyOZcZaVkGLH0d9b6828",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{host}}api/bookings/22/cancel",
+							"host": [
+								"{{host}}api"
+							],
+							"path": [
+								"bookings",
+								"22",
+								"cancel"
+							]
+						},
+						"description": "# Cancel Booking\n- Description: Cancels an existing booking. Only the user who created the booking can cancel it.\n- Path Variable :bookingId – ID of the booking to cancel\n- Authentication: Required (customers)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "Make Payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|xADC0PlZBOPG6RDP8Ivvorz2MmJgSZSSN4Nwzosm7a1143de",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}api/bookings/24/payment",
+							"host": [
+								"{{host}}api"
+							],
+							"path": [
+								"bookings",
+								"24",
+								"payment"
+							]
+						},
+						"description": "# Make Payment\n- Description: Processes payment for a specific booking. Mock payment is used in this implementation. Updates booking status to confirmed if successful.\n- Path Variable: bookingId – ID of the booking to pay for\n- Authentication: Required (customer only)"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/payments/{id}",
+							"path": [
+								"payments",
+								"{id}"
+							]
+						},
+						"description": "# Get Payment Details\n- Description: Retrieves details of a specific payment, including the related booking, ticket, and event. Only accessible by the user who made the payment.\n- Path Variable: paymentId – ID of the payment\n- Authentication: Required (customer only)"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-Key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://farming-simulator.pstmn.io"
+		}
+	]
+}
